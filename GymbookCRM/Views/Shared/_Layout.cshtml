@@ -4,18 +4,23 @@
     <meta charset="utf-8" />
     <title>@ViewData["Title"] - GYMBOOK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <!-- CSS de Bootstrap y el template -->
     <link href="~/css/core.css" rel="stylesheet" />
     <link href="~/css/theme-default.css" rel="stylesheet" />
     <link href="~/css/demo.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+
+
 </head>
-<body class="layout-menu-fixed">
+<body class="layout-menu-fixed layout-navbar-fixed">
     <!-- Layout Wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
             <!-- Menu Lateral -->
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme d-flex flex-column">
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+
                 <div class="app-brand demo">
                     <a href="@Url.Action("Index", "Home")" class="app-brand-link">
                         <span class="app-brand-text demo menu-text fw-bold">GYMBOOK</span>
@@ -24,15 +29,15 @@
 
                 <ul class="menu-inner py-1 flex-grow-1">
                     <!-- El menú toma todo el espacio restante -->
-                    <li class="menu-item">
+                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
                         <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
                             <i class="menu-icon ri-home-line"></i>
                             <div>Dashboard</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
-                        <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
+                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Clientes" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+                        <a asp-controller="Clientes" asp-action="Index" class="menu-link">
                             <i class="menu-icon ri-user-line"></i>
                             <div>Clientes</div>
                         </a>
@@ -43,30 +48,29 @@
                         <span class="menu-header-text">Entrenamiento</span>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Planes" ? "active" : "")">
                         <a asp-controller="Dashboard" asp-action="Planes" class="menu-link">
                             <i class="menu-icon ri-file-list-3-line"></i>
                             <div>Planes</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Rutinas" ? "active" : "")">
                         <a asp-controller="Dashboard" asp-action="Rutinas" class="menu-link">
-                            <i class="ri-run-line menu-icon"></i>
+                            <i class="menu-icon ri-run-line"></i>
                             <div>Rutinas</div>
                         </a>
                     </li>
 
-                    <li class="menu-item">
+                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Ejercicios" ? "active" : "")">
                         <a asp-controller="Dashboard" asp-action="Ejercicios" class="menu-link">
                             <i class="menu-icon ri-weight-line"></i>
                             <div>Ejercicios</div>
                         </a>
                     </li>
+
                     <!-- Cierre: Apartado de Entrenamiento -->
                 </ul>
-
-
 
                 <!-- Configuración: Pegada al fondo con línea divisoria -->
                 <ul class="menu-inner py-1">
@@ -82,18 +86,59 @@
             </aside>
             <!-- Cierre del menú lateral -->
 
+
+
             <!-- Contenido principal -->
             <div class="layout-page">
+
+           
                 <!-- Navbar superior -->
                 <nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
-                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                    <div class="navbar-nav-right d-flex align-items-center position-relative" id="navbar-collapse">
+
+                        <!-- Botón de menú para móviles -->
+                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-2 d-xl-none">
+                            <i class="ri-menu-line"></i>
+                        </a>
+
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
-                            <li class="nav-item">
-                                <a class="nav-link" href="@Url.Action("Logout", "Account")">Cerrar sesión</a>
+
+                            <!-- Foto de perfil con evento de clic -->
+                            <li class="nav-item position-relative">
+                                <a class="nav-link" href="javascript:void(0);" id="profilePicture">
+                                    <div class="avatar avatar-online">
+                                        <img src="~/assets/images/profile.png" alt="Perfil" class="w-px-40 h-auto rounded-circle" />
+                                    </div>
+                                </a>
+
+                                <!-- Pop-up oculto -->
+                                <div id="profilePopup" class="card shadow-lg p-2 position-absolute end-0 mt-2 bg-menu-theme" style="display: none; width: 200px; z-index: 999;">
+                                    <ul class="menu-inner list-unstyled mb-0 d-flex flex-column">
+                                        <li class="menu-item">
+                                            <a href="@Url.Action("Perfil", "Account")" class="menu-link">
+                                                <i class="menu-icon ri-user-line"></i>
+                                                <div>Mi Perfil</div>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="@Url.Action("Logout", "Account")" class="menu-link">
+                                                <i class="menu-icon ri-logout-box-line"></i>
+                                                <div>Cerrar sesión</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+
                             </li>
                         </ul>
                     </div>
                 </nav>
+
+
+                <!-- Cierre: Navbar superior -->
+
 
                 <!-- Contenido -->
                 <div class="content-wrapper">
@@ -112,6 +157,29 @@
     <script src="~/js/helpers.js"></script>
     <script src="~/js/config.js"></script>
     <script src="~/js/main.js"></script>
+
+    <!-- Scripts personalizados -->
+
+    <!-- 1. para aparecer el pop-up de la foto de perfil -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const profilePicture = document.getElementById("profilePicture");
+            const profilePopup = document.getElementById("profilePopup");
+
+            // Alternar el pop-up al hacer clic en la imagen de perfil
+            profilePicture.addEventListener("click", function (e) {
+                e.stopPropagation(); // Evita que el clic se propague
+                profilePopup.style.display = profilePopup.style.display === "none" ? "block" : "none";
+            });
+
+            // Ocultar el pop-up si se hace clic fuera
+            document.addEventListener("click", function (e) {
+                if (!profilePopup.contains(e.target) && e.target !== profilePicture) {
+                    profilePopup.style.display = "none";
+                }
+            });
+        });
+    </script>
 
 
     

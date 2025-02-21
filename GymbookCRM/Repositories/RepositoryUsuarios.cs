@@ -19,5 +19,14 @@ namespace GymbookCRM.Repositories
                            select datos;
             return await consulta.ToListAsync();
         }
+
+        //quiero uno que me traigan los usuarios con rol Cliente
+        public async Task<List<Usuario>> GetClientesAsync()
+        {
+            var consulta = from datos in this.context.Usuarios
+                           where datos.Rol == "cliente"
+                           select datos;
+            return await consulta.ToListAsync();
+        }
     }
 }
