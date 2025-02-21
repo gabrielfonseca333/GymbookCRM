@@ -2,52 +2,119 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
+    <title>@ViewData["Title"] - GYMBOOK</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GymbookCRM</title>
-    <script type="importmap"></script>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GymbookCRM.styles.css" asp-append-version="true" />
+    <!-- CSS de Bootstrap y el template -->
+    <link href="~/css/core.css" rel="stylesheet" />
+    <link href="~/css/theme-default.css" rel="stylesheet" />
+    <link href="~/css/demo.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">GymbookCRM</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="Index">Ver Usuarios</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="Index">Dashboard</a>
-                        </li>
-                    </ul>
+<body class="layout-menu-fixed">
+    <!-- Layout Wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+        <div class="layout-container">
+            <!-- Menu Lateral -->
+            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme d-flex flex-column">
+                <div class="app-brand demo">
+                    <a href="@Url.Action("Index", "Home")" class="app-brand-link">
+                        <span class="app-brand-text demo menu-text fw-bold">GYMBOOK</span>
+                    </a>
                 </div>
+
+                <ul class="menu-inner py-1 flex-grow-1">
+                    <!-- El menú toma todo el espacio restante -->
+                    <li class="menu-item">
+                        <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
+                            <i class="menu-icon ri-home-line"></i>
+                            <div>Dashboard</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
+                            <i class="menu-icon ri-user-line"></i>
+                            <div>Clientes</div>
+                        </a>
+                    </li>
+
+                    <!-- Apartado de Entrenamiento -->
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Entrenamiento</span>
+                    </li>
+
+                    <li class="menu-item">
+                        <a asp-controller="Dashboard" asp-action="Planes" class="menu-link">
+                            <i class="menu-icon ri-file-list-3-line"></i>
+                            <div>Planes</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a asp-controller="Dashboard" asp-action="Rutinas" class="menu-link">
+                            <i class="ri-run-line menu-icon"></i>
+                            <div>Rutinas</div>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a asp-controller="Dashboard" asp-action="Ejercicios" class="menu-link">
+                            <i class="menu-icon ri-weight-line"></i>
+                            <div>Ejercicios</div>
+                        </a>
+                    </li>
+                    <!-- Cierre: Apartado de Entrenamiento -->
+                </ul>
+
+
+
+                <!-- Configuración: Pegada al fondo con línea divisoria -->
+                <ul class="menu-inner py-1">
+
+                    <li class="menu-item mt-auto">
+                        <a asp-controller="Dashboard" asp-action="Configuracion" class="menu-link">
+                            <i class="ri-settings-3-line menu-icon"></i>
+                            <div>Configuración</div>
+                        </a>
+                    </li>
+                </ul>
+
+            </aside>
+            <!-- Cierre del menú lateral -->
+
+            <!-- Contenido principal -->
+            <div class="layout-page">
+                <!-- Navbar superior -->
+                <nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
+                    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Logout", "Account")">Cerrar sesión</a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!-- Contenido -->
+                <div class="content-wrapper">
+                    <main role="main" class="content-body">
+                        @RenderBody()
+                    </main>
+                </div>
+
+
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - GymbookCRM - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- Scripts de Bootstrap y el template -->
+    <script src="~/js/helpers.js"></script>
+    <script src="~/js/config.js"></script>
+    <script src="~/js/main.js"></script>
+
+
+    
+
 </body>
 </html>
