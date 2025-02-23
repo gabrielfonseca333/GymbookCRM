@@ -1,0 +1,65 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="authentication-wrapper authentication-cover">
+    <div class="authentication-inner row m-0">
+
+        <!-- Imagen en el lado izquierdo -->
+        <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5">
+            <div class="w-100 d-flex justify-content-center">
+                <img src="~/assets/images/register-illustration.png" class="img-fluid" alt="Register Image" width="700" />
+            </div>
+        </div>
+
+        <!-- Formulario de registro -->
+        <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4">
+            <div class="w-px-400 mx-auto">
+                <h4 class="mb-2">¡Empieza tu aventura en GYMBOOK 🚀</h4>
+                <p class="mb-4">Crea tu cuenta para gestionar tu entrenamiento fácilmente.</p>
+
+                <form asp-action="Register" method="post" class="mb-3">
+                    <div class="mb-3">
+                        <label for="Nombre" class="form-label">Nombre</label>
+                        <input class="form-control" placeholder="Introduce tu nombre" required />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="Email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" placeholder="Introduce tu correo" required />
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-password-toggle">
+                        <label for="Password" class="form-label">Contraseña</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="form-control" placeholder="●●●●●●●●" required />
+                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                        <span class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3 form-password-toggle">
+                        <label for="ConfirmPassword" class="form-label">Confirmar contraseña</label>
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="form-control" placeholder="●●●●●●●●" required />
+                            <span class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" required />
+                        <label class="form-check-label" for="terms">Acepto los <a href="#">términos y condiciones</a></label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary d-grid w-100">Crear cuenta</button>
+                </form>
+
+                <p class="text-center">
+                    ¿Ya tienes una cuenta? <a asp-action="Login" asp-controller="Account">Inicia sesión</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
