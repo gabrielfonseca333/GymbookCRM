@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 
 //aqui
 builder.Services.AddTransient<RepositoryUsuarios>();
+builder.Services.AddTransient<RepositoryEntrenamientos>();
 string connectionString = builder.Configuration.GetConnectionString("SqlTajamarGymbook");
 builder.Services.AddDbContext<GymbookContext>(options => options.UseSqlServer(connectionString));
 

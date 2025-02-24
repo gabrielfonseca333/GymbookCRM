@@ -25,8 +25,8 @@
             <span class="menu-header-text">Entrenamiento</span>
         </li>
 
-        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Planes" ? "active" : "")">
-            <a asp-controller="Dashboard" asp-action="Planes" class="menu-link">
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "PlanesEntrenamiento" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+            <a asp-controller="PlanesEntrenamiento" asp-action="Index" class="menu-link">
                 <i class="menu-icon ri-file-list-3-line"></i>
                 <div>Planes</div>
             </a>
