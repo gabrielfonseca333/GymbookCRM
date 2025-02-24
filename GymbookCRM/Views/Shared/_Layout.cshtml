@@ -17,129 +17,35 @@
     <!-- Layout Wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-            <!-- Menu Lateral -->
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
 
+            @* Si no es login ni register, se muestra el menú lateral *@
+            @if (!(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "account" &&
+                       (ViewContext.RouteData.Values["action"].ToString().ToLower() == "login" ||
+                        ViewContext.RouteData.Values["action"].ToString().ToLower() == "register")))
+                {
+                <!-- Menu Lateral -->
+                @Html.Partial("_MenuLateral")
+                ;
 
-                <div class="app-brand demo">
-                    <a href="@Url.Action("Index", "Home")" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bold">GYMBOOK</span>
-                    </a>
-                </div>
+                }
 
-                <ul class="menu-inner py-1 flex-grow-1">
-                    <!-- El menú toma todo el espacio restante -->
-                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
-                        <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
-                            <i class="menu-icon ri-home-line"></i>
-                            <div>Dashboard</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Clientes" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
-                        <a asp-controller="Clientes" asp-action="Index" class="menu-link">
-                            <i class="menu-icon ri-user-line"></i>
-                            <div>Clientes</div>
-                        </a>
-                    </li>
-
-                    <!-- Apartado de Entrenamiento -->
-                    <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Entrenamiento</span>
-                    </li>
-
-                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Planes" ? "active" : "")">
-                        <a asp-controller="Dashboard" asp-action="Planes" class="menu-link">
-                            <i class="menu-icon ri-file-list-3-line"></i>
-                            <div>Planes</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Rutinas" ? "active" : "")">
-                        <a asp-controller="Dashboard" asp-action="Rutinas" class="menu-link">
-                            <i class="menu-icon ri-run-line"></i>
-                            <div>Rutinas</div>
-                        </a>
-                    </li>
-
-                    <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Ejercicios" ? "active" : "")">
-                        <a asp-controller="Dashboard" asp-action="Ejercicios" class="menu-link">
-                            <i class="menu-icon ri-weight-line"></i>
-                            <div>Ejercicios</div>
-                        </a>
-                    </li>
-
-                    <!-- Cierre: Apartado de Entrenamiento -->
-                </ul>
-
-                <!-- Configuración: Pegada al fondo con línea divisoria -->
-                <ul class="menu-inner py-1">
-
-                    <li class="menu-item mt-auto">
-                        <a asp-controller="Dashboard" asp-action="Configuracion" class="menu-link">
-                            <i class="ri-settings-3-line menu-icon"></i>
-                            <div>Configuración</div>
-                        </a>
-                    </li>
-                </ul>
-
-            </aside>
-            <!-- Cierre del menú lateral -->
-
-
+            
 
             <!-- Contenido principal -->
             <div class="layout-page">
 
            
-                <!-- Navbar superior -->
-                <nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
-                    <div class="navbar-nav-right d-flex align-items-center position-relative" id="navbar-collapse">
+                @* Si no es login ni register, se mueste el navbar *@
+                @if (!(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "account" &&
+                       (ViewContext.RouteData.Values["action"].ToString().ToLower() == "login" ||
+                        ViewContext.RouteData.Values["action"].ToString().ToLower() == "register")))
+                {
+                    <!-- Navbar superior -->
+                    @Html.Partial("_NavBar")
+                    ;
+                }
 
-                        <!-- Botón de menú para móviles -->
-                        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-2 d-xl-none">
-                            <i class="ri-menu-line"></i>
-                        </a>
-
-                        <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-                            <!-- Foto de perfil con evento de clic -->
-                            <li class="nav-item position-relative">
-                                <a class="nav-link" href="javascript:void(0);" id="profilePicture">
-                                    <div class="avatar avatar-online">
-                                        <img src="~/assets/images/profile.png" alt="Perfil" class="w-px-40 h-auto rounded-circle" />
-                                    </div>
-                                </a>
-
-                                <!-- Pop-up oculto -->
-                                <div id="profilePopup" class="card shadow-lg p-2 position-absolute end-0 mt-2 bg-menu-theme" style="display: none; width: 200px; z-index: 999;">
-                                    <ul class="menu-inner list-unstyled mb-0 d-flex flex-column">
-                                        <li class="menu-item">
-                                            <a href="@Url.Action("Perfil", "Account")" class="menu-link">
-                                                <i class="menu-icon ri-user-line"></i>
-                                                <div>Mi Perfil</div>
-                                            </a>
-                                        </li>
-                                        <li class="menu-item">
-                                            <a asp-controller="Account" asp-action="Login" class="menu-link">
-                                                <i class="menu-icon ri-logout-box-line"></i>
-                                                <div>Cerrar sesión</div>
-                                            </a>
-                                        </li>
-                                       
-                                    </ul>
-                                </div>
-
-
-
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-
-                <!-- Cierre: Navbar superior -->
-
+                
 
                 <!-- Contenido -->
                 <div class="content-wrapper">
@@ -147,8 +53,6 @@
                         @RenderBody()
                     </main>
                 </div>
-
-
 
             </div>
         </div>

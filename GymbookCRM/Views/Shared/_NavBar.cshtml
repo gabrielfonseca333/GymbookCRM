@@ -1,0 +1,43 @@
+﻿<nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
+    <div class="navbar-nav-right d-flex align-items-center position-relative" id="navbar-collapse">
+
+        <!-- Botón de menú para móviles -->
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-2 d-xl-none">
+            <i class="ri-menu-line"></i>
+        </a>
+
+        <ul class="navbar-nav flex-row align-items-center ms-auto">
+
+            <!-- Foto de perfil con evento de clic -->
+            <li class="nav-item position-relative">
+                <a class="nav-link" href="javascript:void(0);" id="profilePicture">
+                    <div class="avatar avatar-online">
+                        <img src="~/assets/images/profile.png" alt="Perfil" class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                </a>
+
+                <!-- Pop-up oculto -->
+                <div id="profilePopup" class="card shadow-lg p-2 position-absolute end-0 mt-2 bg-menu-theme" style="display: none; width: 200px; z-index: 999;">
+                    <ul class="menu-inner list-unstyled mb-0 d-flex flex-column">
+                        <li class="menu-item">
+                            <a href="@Url.Action("Perfil", "Account")" class="menu-link">
+                                <i class="menu-icon ri-user-line"></i>
+                                <div>Mi Perfil</div>
+                            </a>
+                        </li>
+                        <li class="menu-item">
+                            <a asp-controller="Account" asp-action="Login" class="menu-link">
+                                <i class="menu-icon ri-logout-box-line"></i>
+                                <div>Cerrar sesión</div>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+
+            </li>
+        </ul>
+    </div>
+</nav>

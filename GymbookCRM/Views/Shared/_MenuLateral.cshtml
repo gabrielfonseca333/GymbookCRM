@@ -1,0 +1,58 @@
+﻿@* Views/Shared/_SideMenu.cshtml *@
+<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+    <div class="app-brand demo">
+        <a href="@Url.Action("Index", "Home")" class="app-brand-link">
+            <span class="app-brand-text demo menu-text fw-bold">GYMBOOK</span>
+        </a>
+    </div>
+
+    <ul class="menu-inner py-1 flex-grow-1">
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+            <a asp-controller="Dashboard" asp-action="Index" class="menu-link">
+                <i class="menu-icon ri-home-line"></i>
+                <div>Dashboard</div>
+            </a>
+        </li>
+
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Clientes" && ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")">
+            <a asp-controller="Clientes" asp-action="Index" class="menu-link">
+                <i class="menu-icon ri-user-line"></i>
+                <div>Clientes</div>
+            </a>
+        </li>
+
+        <li class="menu-header small text-uppercase">
+            <span class="menu-header-text">Entrenamiento</span>
+        </li>
+
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Planes" ? "active" : "")">
+            <a asp-controller="Dashboard" asp-action="Planes" class="menu-link">
+                <i class="menu-icon ri-file-list-3-line"></i>
+                <div>Planes</div>
+            </a>
+        </li>
+
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Rutinas" ? "active" : "")">
+            <a asp-controller="Dashboard" asp-action="Rutinas" class="menu-link">
+                <i class="menu-icon ri-run-line"></i>
+                <div>Rutinas</div>
+            </a>
+        </li>
+
+        <li class="menu-item @(ViewContext.RouteData.Values["controller"].ToString() == "Dashboard" && ViewContext.RouteData.Values["action"].ToString() == "Ejercicios" ? "active" : "")">
+            <a asp-controller="Dashboard" asp-action="Ejercicios" class="menu-link">
+                <i class="menu-icon ri-weight-line"></i>
+                <div>Ejercicios</div>
+            </a>
+        </li>
+    </ul>
+
+    <ul class="menu-inner py-1">
+        <li class="menu-item mt-auto">
+            <a asp-controller="Dashboard" asp-action="Configuracion" class="menu-link">
+                <i class="ri-settings-3-line menu-icon"></i>
+                <div>Configuración</div>
+            </a>
+        </li>
+    </ul>
+</aside>

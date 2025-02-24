@@ -43,7 +43,8 @@
                         <a href="@Url.Action("ForgotPassword", "Account")">¿Olvidaste tu contraseña?</a>
                     </div>
 
-                    <button type="submit" class="btn btn-primary d-grid w-100">Iniciar Sesión</button>
+                    @* <button type="submit" class="btn btn-primary d-grid w-100">Iniciar Sesión</button> *@
+                    <a class="btn btn-primary d-grid w-100" asp-controller="Dashboard" asp-action="Index">Iniciar sesion (provisional)</a>
                 </form>
 
                 <p class="text-center">
