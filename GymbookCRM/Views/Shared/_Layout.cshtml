@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@{
+    bool isAuthPage = ViewContext.RouteData.Values["controller"].ToString().ToLower() == "account" &&
+                      (ViewContext.RouteData.Values["action"].ToString().ToLower() == "login" ||
+                       ViewContext.RouteData.Values["action"].ToString().ToLower() == "register");
+}
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,17 +18,25 @@
     <link href="~/css/demo.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
 
+    <style>
+        /* Puedes ajustar estos estilos o moverlos a tu archivo CSS personalizado */
+        .auth-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Ocupa la altura completa de la ventana */
+        }
+    </style>
+
 
 </head>
-<body class="layout-menu-fixed layout-navbar-fixed">
+<body class="@(isAuthPage ? "" : "layout-menu-fixed layout-navbar-fixed")">
     <!-- Layout Wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
             @* Si no es login ni register, se muestra el menú lateral *@
-            @if (!(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "account" &&
-                       (ViewContext.RouteData.Values["action"].ToString().ToLower() == "login" ||
-                        ViewContext.RouteData.Values["action"].ToString().ToLower() == "register")))
+            @if (!isAuthPage)
                 {
                 <!-- Menu Lateral -->
                 @Html.Partial("_MenuLateral")
@@ -36,9 +51,7 @@
 
            
                 @* Si no es login ni register, se mueste el navbar *@
-                @if (!(ViewContext.RouteData.Values["controller"].ToString().ToLower() == "account" &&
-                       (ViewContext.RouteData.Values["action"].ToString().ToLower() == "login" ||
-                        ViewContext.RouteData.Values["action"].ToString().ToLower() == "register")))
+                @if (!isAuthPage)
                 {
                     <!-- Navbar superior -->
                     @Html.Partial("_NavBar")
