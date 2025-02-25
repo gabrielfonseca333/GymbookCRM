@@ -7,21 +7,25 @@ namespace GymbookCRM.Models
     public class Usuario
     {
         [Key]
+        [Column("IDUSUARIO")]
         public int IdUsuario { get; set; }
 
-        [Required]
+        [Column("NOMBRE")]
         public string Nombre { get; set; }
 
-        [Required]
+        [Column("APELLIDO")]
         public string Apellido { get; set; }
 
-        [Required, EmailAddress]
+        [Column("CORREO")]
         public string Correo { get; set; }
 
-        [Required]
+        [Column("CONTRASEÑA")]
         public string Contraseña { get; set; }
 
-        [Required]
+        [Column("ROL")]
         public string Rol { get; set; } // "Cliente" o "Entrenador"
+
+        [Column("IMAGEN")]
+        public string Imagen { get; set; }
     }
 }
