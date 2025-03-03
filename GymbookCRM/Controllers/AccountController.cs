@@ -43,8 +43,11 @@ namespace GymbookCRM.Controllers
             }
             else
             {
-                ViewBag.Mensaje = "Sesión iniciada! ✅";
-                return View(user);
+                // Guardamos en la sesión la información necesaria
+                HttpContext.Session.SetInt32("UserId", user.IdUsuario);
+                HttpContext.Session.SetString("UserRole", user.Rol);
+
+                return RedirectToAction("Index", "Dashboard");
             }
         }
     }

@@ -8,11 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-//aqui
+//Repository
 builder.Services.AddTransient<RepositoryUsuarios>();
 builder.Services.AddTransient<RepositoryEntrenamientos>();
 string connectionString = builder.Configuration.GetConnectionString("SqlPortatilCasa");
 builder.Services.AddDbContext<GymbookContext>(options => options.UseSqlServer(connectionString));
+
+//Memoria
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 var app = builder.Build();
 
@@ -27,6 +36,8 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseSession(); //agregamos middleware de la session
 
 app.UseAuthorization();
 

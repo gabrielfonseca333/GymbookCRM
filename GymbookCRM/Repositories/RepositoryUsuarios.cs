@@ -29,6 +29,20 @@ namespace GymbookCRM.Repositories
             return await consulta.ToListAsync();
         }
 
+        public async Task<Usuario> GetUsuarioById(int? idusuario)
+        {
+            if (idusuario == null)
+            {
+                return null;
+            }
+
+            var consulta = from datos in this.context.Usuarios
+                           where datos.IdUsuario == idusuario
+                           select datos;
+            return await consulta.FirstOrDefaultAsync();
+        }
+
+
         //Login & Register
         private async Task<int> GetMaxIdUser()
         {
