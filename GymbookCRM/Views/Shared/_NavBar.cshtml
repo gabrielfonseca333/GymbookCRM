@@ -1,4 +1,9 @@
-﻿<nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
+﻿@{
+    var userName = Context.Session.GetString("UserName") ?? "Invitado";
+    var userImagen = Context.Session.GetString("UserImage") ?? "~/assets/images/profile.png";
+}
+
+<nav class="layout-navbar navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme">
     <div class="navbar-nav-right d-flex align-items-center position-relative" id="navbar-collapse">
 
         <!-- Botón de menú para móviles -->
@@ -8,13 +13,17 @@
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-            <!-- Foto de perfil con evento de clic -->
+            <!-- Elemento de perfil con imagen y nombre -->
             <li class="nav-item position-relative">
-                <a class="nav-link" href="javascript:void(0);" id="profilePicture">
+                <a class="nav-link d-flex align-items-center" href="javascript:void(0);" id="profilePicture">
+                    <!-- Nombre de usuario con margen derecho -->
+                    <span class="me-3">@userName</span>
+                    <!-- Imagen de perfil -->
                     <div class="avatar avatar-online">
-                        <img src="~/assets/images/profile.png" alt="Perfil" class="w-px-40 h-auto rounded-circle" />
+                        <img src="@Url.Content(userImagen)" alt="Perfil" class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
+
 
                 <!-- Pop-up oculto -->
                 <div id="profilePopup" class="card shadow-lg p-2 position-absolute end-0 mt-2 bg-menu-theme" style="display: none; width: 200px; z-index: 999;">
@@ -31,12 +40,8 @@
                                 <div>Cerrar sesión</div>
                             </a>
                         </li>
-
                     </ul>
                 </div>
-
-
-
             </li>
         </ul>
     </div>

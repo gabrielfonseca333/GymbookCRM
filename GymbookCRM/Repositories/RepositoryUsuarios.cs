@@ -56,20 +56,32 @@ namespace GymbookCRM.Repositories
             }
         }
 
-        public async Task RegisterUserAsync(string nombre, string apellido, string correo, string rol, string password)
+        public async Task RegisterEntrenadorAsync(string nombre, string apellido, string correo, string password, string imagen)
         {
-            Usuario user = new Usuario();
-            //quitar porque SQL lo genera automaticamente: user.IdUsuario = await this.GetMaxIdUser();
-            user.Nombre = nombre;
-            user.Apellido = apellido;
-            user.Correo = correo;
-            user.Rol = rol;
-            user.Imagen = "";
-            user.Salt = HelperCryptography.GenerateSalt();
-            user.Password = HelperCryptography.EncryptPassword(password, user.Salt);
-            this.context.Usuarios.Add(user);
-            await this.context.SaveChangesAsync();
+            // Genera el salt y cifra la contraseña
+            var salt = HelperCryptography.GenerateSalt();
+            var passwordEncrypted = HelperCryptography.EncryptPassword(password, salt);
+
+            // Prepara el string SQL para llamar al procedimiento almacenado sp_InsertEntrenador
+            string sql = "EXEC sp_InsertEntrenador @Nombre = {0}, @Apellido = {1}, @Correo = {2}, @Password = {3}, @Salt = {4}, @Imagen = {5}";
+
+            // Ejecuta el procedimiento pasando los parámetros correspondientes
+            await this.context.Database.ExecuteSqlRawAsync(sql, nombre, apellido, correo, passwordEncrypted, salt, imagen);
         }
+
+        public async Task RegisterClienteAsync(string nombre, string apellido, string correo, string password, string imagen, int idEntrenador)
+        {
+            // Genera el salt y cifra la contraseña
+            var salt = HelperCryptography.GenerateSalt();
+            var passwordEncrypted = HelperCryptography.EncryptPassword(password, salt);
+
+            // Prepara el string SQL para llamar al procedimiento almacenado sp_InsertCliente
+            string sql = "EXEC sp_InsertCliente @Nombre = {0}, @Apellido = {1}, @Correo = {2}, @Password = {3}, @Salt = {4}, @Imagen = {5}, @IdEntrenador = {6}";
+
+            // Ejecuta el procedimiento pasando los parámetros correspondientes
+            await this.context.Database.ExecuteSqlRawAsync(sql, nombre, apellido, correo, passwordEncrypted, salt, imagen, idEntrenador);
+        }
+
 
         public async Task<Usuario> LogInUserAsync(string correo, string password)
         {
